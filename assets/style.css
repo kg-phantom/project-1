@@ -1,0 +1,16 @@
+h1 {
+    text-align: center;
+    background-color: rgb(83, 13, 36);
+    color: white;
+    margin: 0;
+}
+
+.hero {
+    /* Photo by <a href="https://unsplash.com/@brookelark">Brooke Lark</a> on <a href="https://unsplash.com/s/photos/recipe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> */
+    background-image: url("./images/hero1.jpg");
+    width: 100%;
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
