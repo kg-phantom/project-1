@@ -1,0 +1,15 @@
+:root {
+    /* color scheme variables */
+    --primary-color: rgb(83, 13, 36);
+    --secondary-color: rgb(199, 78, 48);
+    --tertiary-color: white;
+}
+
+h1 {
+    font-family: "Cinzel Decorative";
+    font-weight: bold;
+}
+
+p {
+    font-family: "Open Sans", sans-serif;
+}
