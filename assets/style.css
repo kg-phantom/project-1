@@ -1,5 +1,8 @@
 :root {
     /* color scheme variables */
+    --primary-color: rgb(83, 13, 36);
+    --secondary-color: rgb(199, 78, 48);
+    --tertiary-color: white;
 }
 
 h1 {
