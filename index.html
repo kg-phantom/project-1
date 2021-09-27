@@ -3,19 +3,26 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
+        <title>Recipe Wizard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- links to font-family -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Open+Sans&display=swap" rel="stylesheet">
-        <!-- link to UIKit -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
         <link rel="stylesheet" href="assets\style.css">
     </head>
     <body>
-        
+        <!-- Recipe display section -->
+        <div class="reciple-section">
+            <div>
+                <h3>Recommendations:</h3>
+            </div>
+            <!-- div to contain recipes-->
+            <output class="recipe-display">
+                <!-- larger recipe display section -->
+                <div id="large-recipe"></div>
+                <!-- other recipes display -->
+                <ul id="small-recipes"></ul>
+            </output>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
         <script src="assets\index.js"></script>
