@@ -9,7 +9,7 @@ $('.close-modal').click(function() {
 })
 
 var slider = document.getElementById("myRange");
-var output = document.getElementById("demo");
+var output = document.getElementById("output");
 output.innerHTML = slider.value;
 
 slider.oninput = function() {
