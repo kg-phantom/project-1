@@ -6,11 +6,6 @@
         <title>Recipe Wizard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- links to font-family -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Open+Sans&display=swap" rel="stylesheet">
-        <!-- link to UIKit -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
         <!-- link to font and icon -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css" />
@@ -22,6 +17,19 @@
     </head>
 
     <body>
+        <!-- Recipe display section -->
+        <div class="reciple-section">
+            <div>
+                <h3>Recommendations:</h3>
+            </div>
+            <!-- div to contain recipes-->
+            <output class="recipe-display">
+                <!-- larger recipe display section -->
+                <div id="large-recipe"></div>
+                <!-- other recipes display -->
+                <ul id="small-recipes"></ul>
+            </output>
+        </div>
         <header>
             <h1 class="uk-padding-small">Recipe Wizard</h1>
         </header>
