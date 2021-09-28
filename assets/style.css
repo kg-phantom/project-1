@@ -3,6 +3,8 @@
     --primary-color: rgb(83, 13, 36);
     --secondary-color: rgb(199, 78, 48);
     --tertiary-color: white;
+    --quaternary-color: rgb(230, 100, 48);
+    --fifth-color: #ffe54c;
 }
 
 h1 {
@@ -28,10 +30,36 @@ p {
     background-attachment: fixed;
 }
 
+/* modal */
+.modal-content {
+    display: flex;
+    justify-content: space-around;
+}
+
+.modal-content button {
+    border: none;
+    color: var(--tertiary-color);
+    font-size: 28px;
+    background: var(--secondary-color);
+    padding: 10px;
+    margin: 5px 8px 12px 1px;
+}
+
+.modal-content button:hover {
+    background: var(--quaternary-color);
+    border: 1px solid var(--fifth-color);
+    margin: 4px 7px 11px 0;
+}
+
 .modal-button {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.slidecontainer p {
+    font-size: 24px;
+    font-weight: lighter;
 }
 
 #settingsButton {
