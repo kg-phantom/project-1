@@ -1,7 +1,7 @@
 // query selectors for inputs
-var timeOfDay = document.querySelector('');
-var calorieCount = document.querySelector('');
-var dishType = document.querySelector('');
+// var timeOfDay = document.querySelector('');
+// var calorieCount = document.querySelector('');
+// var dishType = document.querySelector('');
 // query selector for recipe container
 var recipeDivEl = document.querySelector('recipe-display');
 // misc variables
@@ -61,12 +61,13 @@ var generateRecipes = function(recipeDataObj) {
 // filter results based off of intolerances/diet checkboxes
 
 // display dropdown menu of nutritional info when a recipe is clicked
-var dropDown = function(event) {
-    event.preventDefault();
+// var dropDown = function(event) {
+//     event.preventDefault();
     // need to create a modal here but I don't know how to yet :/
-};
+// };
 
-recipeDivEl.addEventListener('click', dropDown);
+// recipeDivEl.addEventListener('click', dropDown);
+
 const modalElements = $('.modal-overlay, .modal');
 
 $('.settings').click(function() {
