@@ -1,7 +1,7 @@
 :root {
     /* color scheme variables */
     --primary-color: rgb(83, 13, 36);
-    --secondary-color: rgb(199, 78, 48);
+    --secondary-color: #ffe54c;
     --tertiary-color: white;
 }
 
@@ -53,7 +53,7 @@ p {
 
 .settings::after {
     content: "";
-    background-color: #ffe54c;
+    background-color: var(--secondary-color);
     width: 100%;
     z-index: -1;
     position: absolute;
