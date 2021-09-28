@@ -6,6 +6,7 @@
         <title>Recipe Wizard</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
         <!-- links to font-family -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,8 +55,8 @@
                 </div> <!-- content -->
             </div> <!-- modal -->
         </div> <!-- overlay -->
-
-        <section class="recipes">
+      
+      <section class="recipes">
             <div class="uk-text-center uk-text-middle" uk-height-match uk-grid>
                     <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-height-large uk-background-muted uk-width-1-2">Recipe Suggestion</div>
                     <div class="uk-width-1-2 uk-child-width-1-2 uk-grid-small uk-text-center" uk-grid>
@@ -73,7 +74,54 @@
                         </div>
                     </div>
         </section>
+
+        <!--List of checkboxes-->
+        <div>
+            <ul class="checkboxlist">
+                <p>Diet Choices</p>
+                <li><input type="checkbox" name="balanced"/> Balanced</li>
+                <li><input type="checkbox" name="high-fiber" /> High-Fiber </li>
+                <li><input type="checkbox" name="high-protein" /> High-Protein </li>
+                <li><input type="checkbox" name="low-carb" /> Low-Carb </li>
+                <li><input type="checkbox" name="low-fat" /> Low-Fat </li>
+                <li><input type="checkbox" name="low-sodium" /> Low-Sodium </li>
+                <p>Health Labels / Intolerances</p>
+                <li><input type="checkbox" name="alcohol-free" /> Alcohol-free </li>         
+                <li><input type="checkbox" name="dairy-free" /> Dairy </li>
+                <li><input type="checkbox" name="egg-free" /> Eggs </li>
+                <li><input type="checkbox" name="fish-free" /> Fish </li>  
+                <li><input type="checkbox" name="gluten-free" /> Gluten </li> 
+                <li><input type="checkbox" name="keto-friendly" /> Keto </li>
+                <li><input type="checkbox" name="Mediterranean" /> Mediterranean </li>
+                <li><input type="checkbox" name="low-fat-abs" /> Low-fat-abs </li> 
+                <li><input type="checkbox" name="No-oil-added" /> No oil added </li>
+                <li><input type="checkbox" name="low-sugar" /> No-sugar </li>
+                <li><input type="checkbox" name="paleo" /> Paleo </li>
+                <li><input type="checkbox" name="peanut-free" /> Peanuts </li>
+                <li><input type="checkbox" name="pecatarian" /> Pescatarian </li> 
+                <li><input type="checkbox" name="soy-free" /> Soy </li>
+                <li><input type="checkbox" name="sugar-conscious" /> Sugar-conscious </li>
+                <li><input type="checkbox" name="vegan" /> Vegan </li>  
+                <li><input type="checkbox" name="vegetarian" /> Vegetarian </li>
+            </ul>
+
+
+        <!-- Recipe display section -->
+        <div class="reciple-section">
+            <div>
+                <h3>Recommendations:</h3>
+            </div>
+            <!-- div to contain recipes-->
+            <output class="recipe-display">
+                <!-- larger recipe display section -->
+                <div id="large-recipe"></div>
+                <!-- other recipes display -->
+                <ul id="small-recipes"></ul>
+            </output>
+
+        </div>
         
+
         <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
