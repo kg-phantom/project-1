@@ -26,7 +26,6 @@
         <header>
             <h1 class="uk-padding-small">Recipe Wizard</h1>
         </header>
-
         <div class="hero"></div>
 
         <div class="modal-button">
@@ -81,52 +80,35 @@
         </section>
 
         <!--List of checkboxes-->
-        <div>
+        <div class="checkbox-container">
             <ul class="checkboxlist">
-                <p>Diet Choices</p>
-                <li><input type="checkbox" name="balanced"/> Balanced</li>
-                <li><input type="checkbox" name="high-fiber" /> High-Fiber </li>
-                <li><input type="checkbox" name="high-protein" /> High-Protein </li>
-                <li><input type="checkbox" name="low-carb" /> Low-Carb </li>
-                <li><input type="checkbox" name="low-fat" /> Low-Fat </li>
-                <li><input type="checkbox" name="low-sodium" /> Low-Sodium </li>
-                <p>Health Labels / Intolerances</p>
-                <li><input type="checkbox" name="alcohol-free" /> Alcohol-free </li>         
-                <li><input type="checkbox" name="dairy-free" /> Dairy </li>
-                <li><input type="checkbox" name="egg-free" /> Eggs </li>
-                <li><input type="checkbox" name="fish-free" /> Fish </li>  
-                <li><input type="checkbox" name="gluten-free" /> Gluten </li> 
-                <li><input type="checkbox" name="keto-friendly" /> Keto </li>
-                <li><input type="checkbox" name="Mediterranean" /> Mediterranean </li>
-                <li><input type="checkbox" name="low-fat-abs" /> Low-fat-abs </li> 
-                <li><input type="checkbox" name="No-oil-added" /> No oil added </li>
-                <li><input type="checkbox" name="low-sugar" /> No-sugar </li>
-                <li><input type="checkbox" name="paleo" /> Paleo </li>
-                <li><input type="checkbox" name="peanut-free" /> Peanuts </li>
-                <li><input type="checkbox" name="pecatarian" /> Pescatarian </li> 
-                <li><input type="checkbox" name="soy-free" /> Soy </li>
-                <li><input type="checkbox" name="sugar-conscious" /> Sugar-conscious </li>
-                <li><input type="checkbox" name="vegan" /> Vegan </li>  
-                <li><input type="checkbox" name="vegetarian" /> Vegetarian </li>
+                <p>Diet Choices</p></br>
+                <li><input type="checkbox" name="balanced" id="check1" class="check" hidden/><label for="check1" class="checkmark"></label>Balanced</li>
+                <li><input type="checkbox" name="high-fiber" id="check2" class="check" hidden/><label for="check2" class="checkmark"></label>High-Fiber</li>
+                <li><input type="checkbox" name="high-protein" id="check3" class="check" hidden/><label for="check3" class="checkmark"></label>High-Protein</li>
+                <li><input type="checkbox" name="low-carb" id="check4" class="check" hidden/><label for="check4" class="checkmark"></label>Low-Carb</li>
+                <li><input type="checkbox" name="low-fat" id="check5" class="check" hidden/><label for="check5" class="checkmark"></label>Low-Fat</li>
+                <li><input type="checkbox" name="low-sodium" id="check6" class="check" hidden/><label for="check6" class="checkmark"></label>Low-Sodium</li></br>
+                <p>Health Labels / Intolerances</p></br>
+                <li><input type="checkbox" name="alcohol-free" id="check7" class="check" hidden/><label for="check7" class="checkmark"></label>Alcohol-free</li>         
+                <li><input type="checkbox" name="dairy-free"  id="check8" class="check" hidden/><label for="check8" class="checkmark"></label>Dairy</li>
+                <li><input type="checkbox" name="egg-free" id="check9" class="check" hidden/><label for="check9" class="checkmark"></label>Eggs</li>
+                <li><input type="checkbox" name="fish-free"  id="check10" class="check" hidden/><label for="check10" class="checkmark"></label>Fish</li>  
+                <li><input type="checkbox" name="gluten-free" id="check11" class="check" hidden/><label for="check11" class="checkmark"></label>Gluten </li> 
+                <li><input type="checkbox" name="keto-friendly" id="check12" class="check" hidden/><label for="check12" class="checkmark"></label>Keto</li>
+                <li><input type="checkbox" name="Mediterranean" id="check13" class="check" hidden/><label for="check13" class="checkmark"></label>Mediterranean</li>
+                <li><input type="checkbox" name="low-fat-abs" id="check14" class="check" hidden/><label for="check14" class="checkmark"></label>Low-fat-abs</li> 
+                <li><input type="checkbox" name="No-oil-added" id="check15" class="check" hidden/><label for="check15" class="checkmark"></label>No oil added</li>
+                <li><input type="checkbox" name="low-sugar" id="check16" class="check" hidden/><label for="check16" class="checkmark"></label>No-sugar</li>
+                <li><input type="checkbox" name="paleo" id="check17" class="check" hidden/><label for="check17" class="checkmark"></label>Paleo</li>
+                <li><input type="checkbox" name="peanut-free" id="check18" class="check" hidden/><label for="check18" class="checkmark"></label>Peanuts</li>
+                <li><input type="checkbox" name="pecatarian" id="check19" class="check" hidden/><label for="check19" class="checkmark"></label>Pescatarian</li> 
+                <li><input type="checkbox" name="soy-free" id="check20" class="check" hidden/><label for="check20" class="checkmark"></label>Soy</li>
+                <li><input type="checkbox" name="sugar-conscious" id="check21" class="check" hidden/><label for="check21" class="checkmark"></label>Sugar-conscious</li>
+                <li><input type="checkbox" name="vegan" id="check22" class="check" hidden/><label for="check22" class="checkmark"></label>Vegan</li>  
+                <li><input type="checkbox" name="vegetarian" id="check23" class="check" hidden/><label for="check23" class="checkmark"></label>Vegetarian</li>
             </ul>
-
-
-        <!-- Recipe display section -->
-        <div class="reciple-section">
-            <div>
-                <h3>Recommendations:</h3>
-            </div>
-            <!-- div to contain recipes-->
-            <output class="recipe-display">
-                <!-- larger recipe display section -->
-                <div id="large-recipe"></div>
-                <!-- other recipes display -->
-                <ul id="small-recipes"></ul>
-            </output>
-
         </div>
-        
-
         <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>

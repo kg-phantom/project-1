@@ -160,3 +160,72 @@ p {
   .close-modal:hover > svg > #modal-x {
     fill: black;
   }
+
+  /* checkbox styling section */
+.checkbox-container {
+    float: right;
+    margin: 20px 30px 10px 8px;
+    padding: 8px;
+    width: 30%;
+    background:rgba(228, 228, 228, 0.432);
+}
+.checkboxlist {
+    width: 100%;
+    align-content: center;
+}
+
+.checkboxlist p {
+    display: inline-block;
+    border-bottom: 1px solid black;
+    padding: 5px 2px;
+    text-align: center;
+}
+
+.checkboxlist li {
+    display: inline-block;
+    font-size: 13px;
+    border: 1px solid #969696;
+    border-radius: 15px;
+    padding: 4px 6px 6px;
+    margin: 9px;
+    background: #e7e7e7;
+  }
+
+.checkboxlist li:hover {
+    box-shadow: 1px 1px 10px rgba(107, 107, 107, 0.1), -1px -1px 10px rgba(107, 107, 107, 0.1);
+    background: #ebeaea;
+}
+
+.checkmark {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    align-content: left;
+    background-color: white;
+    border-radius: 3px;
+    position: relative;
+    transition: background-color 0.3s;
+    margin: 3px 4px 0 0;
+}
+
+.check:checked ~ .checkmark {
+    background-color: var(--secondary-color);
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 9px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotateZ(40deg);
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.check:checked ~ .checkmark::after {
+    opacity: 1;
+}
