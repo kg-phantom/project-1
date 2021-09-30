@@ -7,11 +7,15 @@
     --fifth-color: #ffe54c;
 }
 
+nav {
+    width: 100%;
+    background-color: var(--primary-color);
+}
+
 h1 {
     font-family: "Cinzel Decorative";
     font-weight: bold;
     text-align: center;
-    background-color: var(--primary-color);
     color: var(--tertiary-color);
     margin: 0;
 }
@@ -28,6 +32,8 @@ p {
 .hero {
     /* Photo by <a href="https://unsplash.com/@brookelark">Brooke Lark</a> on <a href="https://unsplash.com/s/photos/recipe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> */
     background-image: url("./images/hero1.jpg");
+    display: flex;
+    justify-content: center;
     width: 100%;
     height: 400px;
     background-position: center;
@@ -48,10 +54,6 @@ p {
     padding: 8px;
     margin: 10px;
     border-bottom: 1px solid #969696;
-}
-
-.meal-type {
-    border-bottom: none;
 }
 
 .modal-content button {
@@ -163,3 +165,117 @@ p {
   .close-modal:hover > svg > #modal-x {
     fill: black;
   }
+
+  /* recipe display extra styling */
+
+  /* checkbox styling section */
+
+.checkbox-container {
+    float: right;
+    width: auto;
+    height: auto;
+    max-width: 40%;
+    margin: 20px 30px 10px 8px;
+    padding: 8px;
+    background:rgba(228, 228, 228, 0.432);
+    box-shadow: 1px 1px 40px rgba(150, 150, 150, 0.3), -1px -1px 40px rgba(146, 146, 146, 0.1);
+}
+
+
+.checkboxlist p {
+    display: inline-block;
+    border-bottom: 1px solid black;
+    padding: 5px 2px;
+    text-align: center;
+}
+
+.checkboxlist li {
+    display: inline-block;
+    font-size: 13px;
+    border: 1px solid #969696;
+    border-radius: 15px;
+    padding: 4px 6px 6px;
+    margin: 9px;
+    background: #e7e7e7;
+  }
+
+.checkboxlist li:hover {
+    box-shadow: 1px 1px 10px rgba(107, 107, 107, 0.1), -1px -1px 10px rgba(107, 107, 107, 0.1);
+    background: #ebeaea;
+}
+
+.checkmark {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    align-content: left;
+    background-color: white;
+    border-radius: 3px;
+    position: relative;
+    transition: background-color 0.3s;
+    margin: 3px 4px 0 0;
+}
+
+.check:checked ~ .checkmark {
+    background-color: var(--secondary-color);
+}
+
+.checkmark::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    height: 9px;
+    border-right: 2px solid white;
+    border-bottom: 2px solid white;
+    top: 40%;
+    left: 45%;
+    transform: translate(-50%, -50%) rotateZ(40deg);
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.check:checked ~ .checkmark::after {
+    opacity: 1;
+}
+
+    /*dropdown styling */
+
+    #checkboxlist li {
+        display: none;
+    }
+    #checkboxlist p {
+        display: flex;
+        flex-direction: row;
+        width: 50%;
+        font-size: 10px;
+        margin: 0;
+    }
+    
+      .checkbox-container:hover {
+        background-color: white;
+      }
+      
+      #checkboxlist.open {
+          width: 100%;
+          float: right;
+      }
+      #checkboxlist.open li {
+        display: inline-block;
+      }
+      
+      #checkboxlist.open p {
+          font-size: 18px;
+      }
+
+      #checkboxlist span:before {
+        display: flex;
+        top: 5px;
+        right: 15px;
+        content: "\2193";
+      }
+      
+      #checkboxlist.open span:before {
+        content: "\2191";
+      }
+    
+    /* end dropdown styling */
