@@ -113,8 +113,11 @@ $("#cookbook-submit").on("click", function(event) {
     .then(function(response) {
         if(response.ok) {
             response.json().then(function(data) {
-                if($("#cookbooks p")) {
-                    $("#cookbooks p").each(function() {
+                if($("#cookbooks a")) {
+                    $("#cookbooks a").each(function() {
+                        this.remove();
+                    })
+                    $("#cookbooks br").each(function() {
                         this.remove();
                     })
                 }
