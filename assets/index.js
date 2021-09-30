@@ -82,6 +82,7 @@ $('#checkboxlist').hover(function () {
 // expanded check capability
 $(document).on('click','li',function(){
         $(this).find('input[type="checkbox"]').prop('checked',true);
+        $(this).find('input[type="checkbox"]').prop('checked', false);
        });
 
 
