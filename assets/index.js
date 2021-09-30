@@ -107,7 +107,7 @@ slider.oninput = function() {
 $("#cookbook-submit").on("click", function(event) {
     event.preventDefault();
     var searchTerm = $("#cookbook-search").val().trim();
-    var apiUrl = `http://openlibrary.org/search.json?q=${searchTerm}+cookbook`
+    var apiUrl = `https://openlibrary.org/search.json?q=${searchTerm}+cookbook`
 
     fetch(apiUrl)
     .then(function(response) {
@@ -126,7 +126,7 @@ $("#cookbook-submit").on("click", function(event) {
                     var isbn = data.docs[i].isbn[0];
                     console.log(bookTitle);
                     var bookSuggestEl = $("<a></a>").text(bookTitle);
-                    bookSuggestEl.attr("href", "http://openlibrary.org/isbn/" + isbn);
+                    bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
                     $("#cookbooks").append(bookSuggestEl);
                     $("#cookbooks").append($("<br />"));
                 }
