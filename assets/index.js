@@ -1,70 +1,45 @@
 // query selectors for inputs
-// var timeOfDay = document.querySelector('');
-// var calorieCount = document.querySelector('');
-// var dishType = document.querySelector('');
+var timeOfDay = document.querySelector('.time-of-day');
+var calorieCount = document.querySelector('#output');
+var dishType = document.querySelector('.meal-type');
 // query selector for recipe container
-var recipeDivEl = document.querySelector('recipe-display');
-// misc variables
-var recipeDisplayEl = document.querySelector('.recipe-display');
-var recipeIdCounter = 0;
+const img = document.querySelectorAll(".recipeImg");
+const recipeLabel = document.querySelectorAll(".recipeText");
+const card = document.querySelectorAll("#card")
+const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
 
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min)
+}
 
+let hitsNum = randomInt(0,19)
 
-// get user input and fetch recipes
-
-// gather user input parameters
-
-// Create variables to hold user input parameters
-
-// Send parameters to fetch() function to get a list of recipe datapoints
-var recipeFetch = function() {
-    var apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
-    fetch(apiUrl)
-    .then(response => response.json())
-    .then(data => {
-        var selectionArray = [0, 1, 2, 3, 4];
-        for(var i = 0; i < selectionArray.length; i++)
-        // assign variable to the elements returned from the api call
-        var recipeName = data['hits'][selectionArray[i]]['recipe']['label'];
-        var recipeImg = data['hits'][selectionArray[i]]['recipe']['image'];
-        // not sure what other data we want to display for the recipes, but it will be stored as variables here
-
-        // package data returned as an array
-        var recipeDataObj = {
-            name: recipeName,
-            image: recipeImg
+function loadDoc() {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var data = JSON.parse(this.responseText);
+            console.log(data.hits)
+            for (var i = 0; i < 6; i++) {
+                let hitsNum = randomInt(0,20);
+                console.log(hitsNum)
+                img[i].src = data.hits[hitsNum].recipe.image;
+                recipeLabel[i].innerHTML = data.hits[hitsNum].recipe.label;
+                console.log(data.hits[hitsNum].recipe.shareAs);
+                console.log(card)
+                card[i].onclick = function () {
+                    location.href = data.hits[hitsNum].recipe.shareAs;
+                }
+                console.log(data.hits[hitsNum].recipe.label);
+                randomInt(0,20);
+            }
         }
-        // send recipe data to function to create recipe display
-        generateRecipes(recipeDataObj);
-    });
-};
-var generateRecipes = function(recipeDataObj) {
-     // generate elements for each recipe
-     var recipeContainerEl = document.createElement('div');
-     recipeContainerEl.className = "";
-     // create id as a custom attribute
-     recipeContainerEl.setAttribute('data-recipe-id', recipeIdCounter);
-     recipeContainerEl.style.background = recipeDataObj.image;
-     // create title
-     var titleEl = document.createElement('h2');
-     titleEl.textContent = recipeDataObj.name;
-     titleEl.className = "";
-     recipeContainerEl.appendChild(titleEl);
-     
-     recipeDisplayEl.appendChild(recipeContainerEl);
+    };
+    xhttp.open("GET", apiUrl, true);
+    xhttp.send();
+}
 
-     // increment recipeIdCounter by one for next recipe
-     recipeIdCounter++;
-};
-
-
-// filter results based off of intolerances/diet checkboxes
-
-// display dropdown menu of nutritional info when a recipe is clicked
-// var dropDown = function(event) {
-//     event.preventDefault();
-
-// recipeDivEl.addEventListener('click', dropDown);
+loadDoc();
 
 // John's go at the dropdown menu
 $('#checkboxlist').hover(function () {
