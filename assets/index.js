@@ -103,3 +103,37 @@ output.innerHTML = slider.value;
 slider.oninput = function() {
   output.innerHTML = this.value;
 }
+
+$("#cookbook-submit").on("click", function(event) {
+    event.preventDefault();
+    var searchTerm = $("#cookbook-search").val().trim();
+    var apiUrl = `http://openlibrary.org/search.json?q=${searchTerm}+cookbook`
+
+    fetch(apiUrl)
+    .then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data) {
+                if($("#cookbooks p")) {
+                    $("#cookbooks p").each(function() {
+                        this.remove();
+                    })
+                }
+                for(var i = 0; i < 3; i++) {
+                    var bookTitle = data.docs[i].title;
+                    var isbn = data.docs[i].isbn[0];
+                    console.log(bookTitle);
+                    var bookSuggestEl = $("<a></a>").text(bookTitle);
+                    bookSuggestEl.attr("href", "http://openlibrary.org/isbn/" + isbn);
+                    $("#cookbooks").append(bookSuggestEl);
+                    $("#cookbooks").append($("<br />"));
+                }
+            });
+        }
+        else {
+            console.log("fetch failed");
+        }
+    })
+    .catch(function(error) {
+        console.log("Could not connect to Open Library.");
+    })
+});
