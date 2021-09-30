@@ -23,12 +23,29 @@
     </head>
 
     <body>
-        <header>
-            <h1 class="uk-padding-small">Recipe Wizard</h1>
-        </header>
+        <nav uk-navbar>
+            <div class="uk-navbar-center">
+                <div class="uk-navbar-center-left">
+                    <ul class="uk-navbar-nav uk-padding uk-padding-remove-vertical">
+                        <li>
+                            <a uk-scroll href="#recipe-search">Recipes</a>
+                        </li>
+                    </ul>
+                </div>
+                <h1 class="uk-padding-small">Recipe Wizard</h1>
+                <div class="uk-navbar-center-right">
+                    <ul class="uk-navbar-nav uk-padding uk-padding-remove-vertical">
+                        <li>
+                            <a uk-scroll href="#cookbooks">Cookbooks</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </nav>
         <div class="hero"></div>
 
-        <div class="modal-button">
+        <div class="modal-button" id="recipe-search">
             <button id="settingsButton" class="settings">Preferences</button>
         </div>
 
@@ -97,8 +114,8 @@
 
         <!--List of checkboxes-->
         <div class="checkbox-container">
-            <ul class="checkboxlist">
-                <p>Diet Choices</p></br>
+            <ul class="checkboxlist" id="checkboxlist">
+                <p>Diet Choices</p>
                 <li><input type="checkbox" name="balanced" id="check1" class="check" hidden/><label for="check1" class="checkmark"></label>Balanced</li>
                 <li><input type="checkbox" name="high-fiber" id="check2" class="check" hidden/><label for="check2" class="checkmark"></label>High-Fiber</li>
                 <li><input type="checkbox" name="high-protein" id="check3" class="check" hidden/><label for="check3" class="checkmark"></label>High-Protein</li>
@@ -123,8 +140,20 @@
                 <li><input type="checkbox" name="sugar-conscious" id="check21" class="check" hidden/><label for="check21" class="checkmark"></label>Sugar-conscious</li>
                 <li><input type="checkbox" name="vegan" id="check22" class="check" hidden/><label for="check22" class="checkmark"></label>Vegan</li>  
                 <li><input type="checkbox" name="vegetarian" id="check23" class="check" hidden/><label for="check23" class="checkmark"></label>Vegetarian</li>
+                <span></span>
             </ul>
         </div>
+
+        <!-- Cookbook Search Section -->
+        <section class="cookbooks" id="cookbooks">
+            <h2>Cookbooks</h2>
+            <form>
+                <label for="cookbook-search">Search for cookbooks:</label>
+                <input type="text" id="cookbook-search" name="cookbook-search" placeholder="Search Cookbooks">
+                <button type="submit" id="cookbook-submit">Search</button>
+            </form>
+        </section>
+
         <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
