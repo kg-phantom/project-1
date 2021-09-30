@@ -3,7 +3,7 @@ Description:
     Recipe Wizard is a webiste that allows users to receive recommendations of recipes when given their preferences. The site also allows those who want more recipe options to find a cookbook that they may want.
 
 Site image:
-<img src="./assets/images/site-image>
+<img src= "./assets/images/site-image"/>
 
 Upon opening the site, the user will be able to choose their preferences and diet restrictions.
 (insert image of preferences/diet checkboxes) 
