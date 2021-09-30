@@ -23,12 +23,29 @@
     </head>
 
     <body>
-        <header>
-            <h1 class="uk-padding-small">Recipe Wizard</h1>
-        </header>
+        <nav uk-navbar>
+            <div class="uk-navbar-center">
+                <div class="uk-navbar-center-left">
+                    <ul class="uk-navbar-nav uk-padding uk-padding-remove-vertical">
+                        <li>
+                            <a uk-scroll href="#recipe-search">Recipes</a>
+                        </li>
+                    </ul>
+                </div>
+                <h1 class="uk-padding-small">Recipe Wizard</h1>
+                <div class="uk-navbar-center-right">
+                    <ul class="uk-navbar-nav uk-padding uk-padding-remove-vertical">
+                        <li>
+                            <a uk-scroll href="#cookbooks">Cookbooks</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+        </nav>
         <div class="hero"></div>
 
-        <div class="modal-button">
+        <div class="modal-button" id="recipe-search">
             <button id="settingsButton" class="settings">Preferences</button>
         </div>
 
@@ -109,6 +126,12 @@
                 <li><input type="checkbox" name="vegetarian" id="check23" class="check" hidden/><label for="check23" class="checkmark"></label>Vegetarian</li>
             </ul>
         </div>
+
+        <!-- Cookbook Search Section -->
+        <section class="cookbooks" id="cookbooks">
+            <h2>Cookbooks</h2>
+        </section>
+
         <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
