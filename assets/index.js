@@ -20,7 +20,7 @@ function loadDoc() {
         if (this.readyState == 4 && this.status == 200) {
             var data = JSON.parse(this.responseText);
             console.log(data.hits)
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < 6; i++) {
                 let hitsNum = randomInt(0,20);
                 console.log(hitsNum)
                 img[i].src = data.hits[hitsNum].recipe.image;
@@ -82,14 +82,17 @@ slider.oninput = function() {
 $("#cookbook-submit").on("click", function(event) {
     event.preventDefault();
     var searchTerm = $("#cookbook-search").val().trim();
-    var apiUrl = `http://openlibrary.org/search.json?q=${searchTerm}+cookbook`
+    var apiUrl = `https://openlibrary.org/search.json?q=${searchTerm}+cookbook`
 
     fetch(apiUrl)
     .then(function(response) {
         if(response.ok) {
             response.json().then(function(data) {
-                if($("#cookbooks p")) {
-                    $("#cookbooks p").each(function() {
+                if($("#cookbooks a")) {
+                    $("#cookbooks a").each(function() {
+                        this.remove();
+                    })
+                    $("#cookbooks br").each(function() {
                         this.remove();
                     })
                 }
@@ -98,7 +101,7 @@ $("#cookbook-submit").on("click", function(event) {
                     var isbn = data.docs[i].isbn[0];
                     console.log(bookTitle);
                     var bookSuggestEl = $("<a></a>").text(bookTitle);
-                    bookSuggestEl.attr("href", "http://openlibrary.org/isbn/" + isbn);
+                    bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
                     $("#cookbooks").append(bookSuggestEl);
                     $("#cookbooks").append($("<br />"));
                 }
