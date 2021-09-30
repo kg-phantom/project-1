@@ -56,13 +56,6 @@ p {
     border-bottom: 1px solid #969696;
 }
 
-<<<<<<< HEAD
-.meal-type {
-    border-bottom: none;
-}
-
-=======
->>>>>>> 3d532631211185c9b33e40cece62cf6703cd9272
 .modal-content button {
     border: none;
     color: var(--tertiary-color);
@@ -173,21 +166,6 @@ p {
     fill: black;
   }
 
-<<<<<<< HEAD
-  /* checkbox styling section */
-.checkbox-container {
-    float: right;
-    margin: 20px 30px 10px 8px;
-    padding: 8px;
-    width: 30%;
-    background:rgba(228, 228, 228, 0.432);
-}
-.checkboxlist {
-    width: 100%;
-    align-content: center;
-}
-
-=======
   /* recipe display extra styling */
 
   /* checkbox styling section */
@@ -203,8 +181,11 @@ p {
     box-shadow: 1px 1px 40px rgba(150, 150, 150, 0.3), -1px -1px 40px rgba(146, 146, 146, 0.1);
 }
 
+.checkboxlist {
+    width: 100%;
+    align-content: center;
+}
 
->>>>>>> 3d532631211185c9b33e40cece62cf6703cd9272
 .checkboxlist p {
     display: inline-block;
     border-bottom: 1px solid black;
@@ -260,8 +241,6 @@ p {
 .check:checked ~ .checkmark::after {
     opacity: 1;
 }
-<<<<<<< HEAD
-=======
 
     /*dropdown styling */
 
@@ -339,4 +318,3 @@ p {
 #cookbook-submit:hover {
     background-color: #e0e0e0;
 }
->>>>>>> 3d532631211185c9b33e40cece62cf6703cd9272
