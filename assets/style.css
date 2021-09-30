@@ -7,13 +7,22 @@
     --fifth-color: #ffe54c;
 }
 
+nav {
+    width: 100%;
+    background-color: var(--primary-color);
+}
+
 h1 {
     font-family: "Cinzel Decorative";
     font-weight: bold;
     text-align: center;
-    background-color: var(--primary-color);
     color: var(--tertiary-color);
     margin: 0;
+}
+
+h2 {
+    font-family: "Open Sans", sans-serif;
+    color: var(--secondary-color);
 }
 
 p {
@@ -270,3 +279,38 @@ p {
       }
     
     /* end dropdown styling */
+
+
+/* recipes styling */
+.recipes {
+    margin:0 0 40px;
+}
+
+/* cookbooks styling section */
+.cookbooks {
+    padding: 25px 20px 50px 50px;
+    height: auto;
+    width: 80%;
+    background: #ffee8f;
+}
+
+.cookbooks form, #cookbook-search, #cookbook-submit {
+    font-size: 25px;
+    font-weight: lighter;
+}
+
+#cookbook-search {
+    border: none;
+    padding: 5px 8px;
+}
+
+#cookbook-submit {
+    border: 1px solid #dddddd;
+    margin: 0 5px;
+    padding: 5px 8px;
+    border-radius: 18px;
+}
+
+#cookbook-submit:hover {
+    background-color: #e0e0e0;
+}
