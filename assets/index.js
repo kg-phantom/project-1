@@ -63,10 +63,28 @@ var generateRecipes = function(recipeDataObj) {
 // display dropdown menu of nutritional info when a recipe is clicked
 // var dropDown = function(event) {
 //     event.preventDefault();
-    // need to create a modal here but I don't know how to yet :/
-// };
 
 // recipeDivEl.addEventListener('click', dropDown);
+
+// John's go at the dropdown menu
+$('#checkboxlist').hover(function () {
+
+   var is_open =
+   $(this).hasClass("open");
+   if(is_open) {
+       $(this).removeClass("open");
+   } 
+   else {
+       $(this).addClass("open");
+   }
+  
+    });
+// expanded check capability
+$(document).on('click','li',function(){
+        $(this).find('input[type="checkbox"]').prop('checked',true);
+       });
+
+
 
 const modalElements = $('.modal-overlay, .modal');
 

@@ -51,10 +51,6 @@ p {
     border-bottom: 1px solid #969696;
 }
 
-.meal-type {
-    border-bottom: none;
-}
-
 .modal-content button {
     border: none;
     color: var(--tertiary-color);
@@ -165,18 +161,21 @@ p {
     fill: black;
   }
 
+  /* recipe display extra styling */
+
   /* checkbox styling section */
+
 .checkbox-container {
     float: right;
+    width: auto;
+    height: auto;
+    max-width: 40%;
     margin: 20px 30px 10px 8px;
     padding: 8px;
-    width: 30%;
     background:rgba(228, 228, 228, 0.432);
+    box-shadow: 1px 1px 40px rgba(150, 150, 150, 0.3), -1px -1px 40px rgba(146, 146, 146, 0.1);
 }
-.checkboxlist {
-    width: 100%;
-    align-content: center;
-}
+
 
 .checkboxlist p {
     display: inline-block;
@@ -233,3 +232,45 @@ p {
 .check:checked ~ .checkmark::after {
     opacity: 1;
 }
+
+    /*dropdown styling */
+
+    #checkboxlist li {
+        display: none;
+    }
+    #checkboxlist p {
+        display: flex;
+        flex-direction: row;
+        width: 50%;
+        font-size: 10px;
+        margin: 0;
+    }
+    
+      .checkbox-container:hover {
+        background-color: white;
+      }
+      
+      #checkboxlist.open {
+          width: 100%;
+          float: right;
+      }
+      #checkboxlist.open li {
+        display: inline-block;
+      }
+      
+      #checkboxlist.open p {
+          font-size: 18px;
+      }
+
+      #checkboxlist span:before {
+        display: flex;
+        top: 5px;
+        right: 15px;
+        content: "\2193";
+      }
+      
+      #checkboxlist.open span:before {
+        content: "\2191";
+      }
+    
+    /* end dropdown styling */
