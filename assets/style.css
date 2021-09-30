@@ -279,3 +279,38 @@ p {
       }
     
     /* end dropdown styling */
+
+
+/* recipes styling */
+.recipes {
+    margin:0 0 40px;
+}
+
+/* cookbooks styling section */
+.cookbooks {
+    padding: 25px 20px 50px 50px;
+    height: auto;
+    width: 80%;
+    background: #ffee8f;
+}
+
+.cookbooks form, #cookbook-search, #cookbook-submit {
+    font-size: 25px;
+    font-weight: lighter;
+}
+
+#cookbook-search {
+    border: none;
+    padding: 5px 8px;
+}
+
+#cookbook-submit {
+    border: 1px solid #dddddd;
+    margin: 0 5px;
+    padding: 5px 8px;
+    border-radius: 18px;
+}
+
+#cookbook-submit:hover {
+    background-color: #e0e0e0;
+}
