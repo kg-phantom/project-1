@@ -61,7 +61,7 @@ $(document).on('click','li',function(){
 
 
 
-const modalElements = $('.modal-overlay, #preferences');
+const modalElements = $('#preferences-overlay, #preferences');
 
 $('.settings').click(function() {
     modalElements.addClass('active');
@@ -121,7 +121,7 @@ $("#cookbook-submit").on("click", function(event) {
         }
     })
     .catch(function(error) {
-        var cookbookModal = $("#cookbook-modal");
+        var cookbookModal = $("#cookbook-overlay, #cookbook-modal");
         cookbookModal.addClass("active");
         $(".close-modal").on("click", function() {
             cookbookModal.removeClass("active");
