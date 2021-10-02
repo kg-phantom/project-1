@@ -109,6 +109,7 @@ $("#cookbook-submit").on("click", function(event) {
                             var bookSuggestEl = $("<a></a>").text(bookTitle);
                             bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
                         }
+                        bookSuggestEl.attr("target", "_blank");
                         $("#cookbooks").append(bookSuggestEl);
                         $("#cookbooks").append($("<br />"));
                     }  
