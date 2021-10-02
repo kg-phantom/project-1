@@ -97,13 +97,21 @@ $("#cookbook-submit").on("click", function(event) {
                     })
                 }
                 for(var i = 0; i < 3; i++) {
-                    var bookTitle = data.docs[i].title;
-                    var isbn = data.docs[i].isbn[0];
-                    console.log(bookTitle);
-                    var bookSuggestEl = $("<a></a>").text(bookTitle);
-                    bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
-                    $("#cookbooks").append(bookSuggestEl);
-                    $("#cookbooks").append($("<br />"));
+                    if(data.docs[i]) {
+                        var bookTitle = data.docs[i].title;
+                        if(data.docs[i].isbn) {
+                            var isbn = data.docs[i].isbn[0];
+                            var bookSuggestEl = $("<a></a>").text(bookTitle);
+                            bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
+                        }
+                        else {
+                            var oclc = data.docs[i].oclc[0];
+                            var bookSuggestEl = $("<a></a>").text(bookTitle);
+                            bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
+                        }
+                        $("#cookbooks").append(bookSuggestEl);
+                        $("#cookbooks").append($("<br />"));
+                    }  
                 }
             });
         }
