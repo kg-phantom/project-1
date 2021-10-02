@@ -96,7 +96,7 @@ $("#cookbook-submit").on("click", function(event) {
                         this.remove();
                     })
                 }
-                for(var i = 0; i < 3; i++) {
+                for(var i = 0; i < 5; i++) {
                     if(data.docs[i]) {
                         var bookTitle = data.docs[i].title;
                         if(data.docs[i].isbn) {
@@ -104,10 +104,15 @@ $("#cookbook-submit").on("click", function(event) {
                             var bookSuggestEl = $("<a></a>").text(bookTitle);
                             bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
                         }
-                        else {
+                        else if(data.docs[i].oclc) {
                             var oclc = data.docs[i].oclc[0];
                             var bookSuggestEl = $("<a></a>").text(bookTitle);
                             bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
+                        }
+                        else {
+                            var lccn = data.docs[i].lccn[0];
+                            var bookSuggestEl = $("<a></a>").text(bookTitle);
+                            bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
                         }
                         bookSuggestEl.attr("target", "_blank");
                         $("#cookbooks").append(bookSuggestEl);
