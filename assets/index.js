@@ -98,7 +98,7 @@ $("#cookbook-submit").on("click", function(event) {
                 }
                 for(var i = 0; i < 5; i++) {
                     if(data.docs[i]) {
-                        var book = randomInt(0, data.docs.length);
+                        var book = randomInt(0, (data.docs.length - 1));
                         var bookTitle = data.docs[book].title;
                         var bookSuggestEl = $("<a></a>").text(bookTitle);
                         if(data.docs[book].isbn) {
