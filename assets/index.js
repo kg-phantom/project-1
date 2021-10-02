@@ -98,20 +98,19 @@ $("#cookbook-submit").on("click", function(event) {
                 }
                 for(var i = 0; i < 5; i++) {
                     if(data.docs[i]) {
-                        var bookTitle = data.docs[i].title;
-                        if(data.docs[i].isbn) {
-                            var isbn = data.docs[i].isbn[0];
-                            var bookSuggestEl = $("<a></a>").text(bookTitle);
+                        var book = randomInt(0, data.docs.length);
+                        var bookTitle = data.docs[book].title;
+                        var bookSuggestEl = $("<a></a>").text(bookTitle);
+                        if(data.docs[book].isbn) {
+                            var isbn = data.docs[book].isbn[0];
                             bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
                         }
-                        else if(data.docs[i].oclc) {
-                            var oclc = data.docs[i].oclc[0];
-                            var bookSuggestEl = $("<a></a>").text(bookTitle);
+                        else if(data.docs[book].oclc) {
+                            var oclc = data.docs[book].oclc[0];
                             bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
                         }
                         else {
-                            var lccn = data.docs[i].lccn[0];
-                            var bookSuggestEl = $("<a></a>").text(bookTitle);
+                            var lccn = data.docs[book].lccn[0];
                             bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
                         }
                         bookSuggestEl.attr("target", "_blank");
