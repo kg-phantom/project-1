@@ -61,7 +61,7 @@ $(document).on('click','li',function(){
 
 
 
-const modalElements = $('.modal-overlay, .modal');
+const modalElements = $('.modal-overlay, #preferences');
 
 $('.settings').click(function() {
     modalElements.addClass('active');
@@ -121,6 +121,13 @@ $("#cookbook-submit").on("click", function(event) {
         }
     })
     .catch(function(error) {
-        console.log("Could not connect to Open Library.");
+        var cookbookModal = $("#cookbook-modal");
+        cookbookModal.addClass("active");
+        $(".close-modal").on("click", function() {
+            cookbookModal.removeClass("active");
+        })
+        $("#ok-btn").on("click", function() {
+            cookbookModal.removeClass("active");
+        })
     })
 });
