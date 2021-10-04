@@ -322,3 +322,7 @@ p {
 .cookbook-suggestions {
     margin-top: 20px;
 }
+
+.cookbook-suggestions a div.uk-card {
+    height: 450px;
+}
