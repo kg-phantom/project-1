@@ -318,3 +318,11 @@ p {
 #cookbook-submit:hover {
     background-color: #e0e0e0;
 }
+
+.cookbook-suggestions {
+    margin-top: 20px;
+}
+
+.cookbook-suggestions a div.uk-card {
+    height: 450px;
+}
