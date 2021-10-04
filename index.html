@@ -49,8 +49,8 @@
             <button id="settingsButton" class="settings">Preferences</button>
         </div>
 
-        <div class="modal-overlay">
-            <div class="modal">
+        <div class="modal-overlay" id="preferences-overlay">
+            <div class="modal" id="preferences">
 
                 <a class="close-modal">
                     <svg viewbox="0 0 20 20">
@@ -59,19 +59,25 @@
                 </a> <!-- close modal -->
 
                 <div class="modal-content">
+                    <div class="inputSearch">
+                        <input type="text" placeholder="Enter Search" onblur="getInputVal()">
+                    </div>
                     <div class="time-of-day">
-                        <button> breakfast </button>
-                        <button> lunch </button>
-                        <button> dinner </button>
+                        <button class="breakfast"> breakfast </button>
+                        <button class="lunch"> lunch </button>
+                        <button class="dinner"> dinner </button>
                     </div>
                     <div class="slidecontainer">
                         <input type="range" min="0" max="2000" value="1000" class="slider" id="myRange">
                         <p>Calories: <span id="output"></span></p>
                     </div>
                     <div class="meal-type">
-                        <button>appetizer</button>
-                        <button>entree</button>
-                        <button>dessert</button>
+                        <button class="starter">appetizer</button>
+                        <button class="entree">entree</button>
+                        <button class="dessert">dessert</button>
+                    </div>
+                    <div class="submitPref">
+                        <button>submit</button>
                     </div>
                 </div> <!-- content -->
             </div> <!-- modal -->
@@ -79,7 +85,7 @@
       
       <section class="recipes">
             <div class="uk-text-center uk-text-middle">
-                <div class="uk-child-width-1-3 uk-grid-small uk-text-center" uk-grid>
+                <div class="uk-child-width-1-2 uk-child-width-1-3@m uk-grid-small uk-text-center" uk-grid>
                     <div>
                         <div class="uk-card uk-card-hover uk-card-default uk-card-body uk-height-medium uk-background-muted recipe-disp" id="card"><p class="recipeText">Recipe Suggestion</p></div>
                             <div class="uk-card-media-top">
@@ -165,6 +171,27 @@
                 <input type="text" id="cookbook-search" name="cookbook-search" placeholder="Search Cookbooks">
                 <button type="submit" id="cookbook-submit">Search</button>
             </form>
+            <!-- search history -->
+            <div class="history"></div>
+            <!-- suggested recipes -->
+            <div class="cookbook-suggestions uk-child-width-1-1 uk-child-width-1-2@s uk-child-width-1-3@m" uk-grid></div>
+            <!-- network error modal -->
+            <div class="modal-overlay" id="cookbook-overlay">
+                <div id="cookbook-modal" class="modal">
+                    <a class="close-modal">
+                        <svg viewbox="0 0 20 20">
+                            <path id="modal-x" fill="#969696" d="M15.898,4.045c-0.271-0.272-0.713-0.272-0.986,0l-4.71,4.711L5.493,4.045c-0.272-0.272-0.714-0.272-0.986,0s-0.272,0.714,0,0.986l4.709,4.711l-4.71,4.711c-0.272,0.271-0.272,0.713,0,0.986c0.136,0.136,0.314,0.203,0.492,0.203c0.179,0,0.357-0.067,0.493-0.203l4.711-4.711l4.71,4.711c0.137,0.136,0.314,0.203,0.494,0.203c0.178,0,0.355-0.067,0.492-0.203c0.273-0.273,0.273-0.715,0-0.986l-4.711-4.711l4.711-4.711C16.172,4.759,16.172,4.317,15.898,4.045z"></path>
+                        </svg>
+                    </a>
+                    <div class="modal-content">
+                        <p class="uk-text-center">Could not connect to Open Library.
+                        <br />
+                        Please check your internet connection or try again later.</p>
+                        <button class="modal-button" id="ok-btn">OK</button>
+                    </div>
+                </div>
+            </div>
+            
         </section>
 
         <script src='https://code.jquery.com/jquery-3.1.0.min.js'></script>

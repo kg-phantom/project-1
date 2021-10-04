@@ -6,13 +6,24 @@ var dishType = document.querySelector('.meal-type');
 const img = document.querySelectorAll(".recipeImg");
 const recipeLabel = document.querySelectorAll(".recipeText");
 const card = document.querySelectorAll("#card")
-const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
+let apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f&random=true";
+// cookbook search history
+var cookbookHistory = JSON.parse(localStorage.getItem("cookbook history"));
 
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
+if(!cookbookHistory) {
+    cookbookHistory = [];
+};
+
+const randomSetInt = (range, count) => {
+    let nums = new Set();
+    while (nums.size < count) {
+        nums.add(Math.floor(Math.random() * (range - 1 + 1) + 1));
+    }
+    return [...nums];
 }
 
-let hitsNum = randomInt(0,19)
+let randomNum = randomSetInt(19, 6)
+console.log(randomNum)
 
 function loadDoc() {
     var xhttp = new XMLHttpRequest();
@@ -21,17 +32,14 @@ function loadDoc() {
             var data = JSON.parse(this.responseText);
             console.log(data.hits)
             for (var i = 0; i < 6; i++) {
-                let hitsNum = randomInt(0,20);
-                console.log(hitsNum)
-                img[i].src = data.hits[hitsNum].recipe.image;
-                recipeLabel[i].innerHTML = data.hits[hitsNum].recipe.label;
-                console.log(data.hits[hitsNum].recipe.shareAs);
-                console.log(card)
+                img[i].src = data.hits[randomNum[i]].recipe.image;
+                recipeLabel[i].innerHTML = data.hits[randomNum[i]].recipe.label;
+                console.log(data.hits[randomNum[i]].recipe.shareAs);
+                let recipeApiUrl = data.hits[randomNum[i]].recipe.shareAs
                 card[i].onclick = function () {
-                    location.href = data.hits[hitsNum].recipe.shareAs;
+                    location.href = recipeApiUrl;
                 }
-                console.log(data.hits[hitsNum].recipe.label);
-                randomInt(0,20);
+                console.log(data.hits[randomNum[i]].recipe.label);
             }
         }
     };
@@ -59,9 +67,14 @@ $(document).on('click','li',function(){
         $(this).find('input[type="checkbox"]').prop('checked',true);
        });
 
+function getInputVal() {
+    const inputVal = document.querySelector('input').value;
+    console.log(inputVal);
+    return inputVal;
+}
 
 
-const modalElements = $('.modal-overlay, .modal');
+const modalElements = $('#preferences-overlay, #preferences');
 
 $('.settings').click(function() {
     modalElements.addClass('active');
@@ -69,6 +82,41 @@ $('.settings').click(function() {
 
 $('.close-modal').click(function() {
     modalElements.removeClass('active');
+})
+
+let mealType = "";
+let dishTypeModal = "";
+
+$('.submitPref').click(function() {
+    var inputVal = getInputVal();
+    apiUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${inputVal}&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f&mealType=${mealType}&dishType=${dishTypeModal}&calories=${slider.value}&random=true`
+    console.log(apiUrl)
+    loadDoc();
+    modalElements.removeClass('active');
+})
+
+$('.breakfast').click(function() {
+    mealType = "Breakfast"
+})
+
+$('.lunch').click(function() {
+    mealType = "Lunch";
+})
+
+$('.dinner').click(function() {
+    mealType = "Dinner";
+})
+
+$('.starter').click(function() {
+    dishTypeModal = "Starter";
+})
+
+$('.entree').click(function() {
+    dishTypeModal = "Main%20course";
+})
+
+$('.dessert').click(function() {
+    dishTypeModal = "Sweets";
 })
 
 var slider = document.getElementById("myRange");
@@ -79,14 +127,15 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 
-$("#cookbook-submit").on("click", function(event) {
-    event.preventDefault();
-    var searchTerm = $("#cookbook-search").val().trim();
+var getCookbooks = function(searchTerm) {
+    var spinnerEl = $("<div></div>").attr("uk-spinner", "ratio: 3");
+    $("#cookbooks").append(spinnerEl);
     var apiUrl = `https://openlibrary.org/search.json?q=${searchTerm}+cookbook`
 
     fetch(apiUrl)
     .then(function(response) {
         if(response.ok) {
+            spinnerEl.remove();
             response.json().then(function(data) {
                 if($("#cookbooks a")) {
                     $("#cookbooks a").each(function() {
@@ -96,22 +145,131 @@ $("#cookbook-submit").on("click", function(event) {
                         this.remove();
                     })
                 }
-                for(var i = 0; i < 3; i++) {
-                    var bookTitle = data.docs[i].title;
-                    var isbn = data.docs[i].isbn[0];
-                    console.log(bookTitle);
-                    var bookSuggestEl = $("<a></a>").text(bookTitle);
-                    bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
-                    $("#cookbooks").append(bookSuggestEl);
-                    $("#cookbooks").append($("<br />"));
+                if($(".no-results")) {
+                    $(".no-results").remove();
+                }
+                if(data.numFound != 0) {
+                    for(var i = 0; i < 6; i++) {
+                        if(data.docs[i]) {
+                            var bookNum = Math.floor(Math.random() * data.docs.length);
+                            var bookTitle = data.docs[bookNum].title;
+                            var bookSuggestEl = $("<a></a>");
+                            var bookCard = $("<div></div>").addClass("uk-card uk-card-default uk-card-hover");
+                            var bookCardBody = $("<div></div>").addClass("uk-card-body uk-card-title uk-text-center");
+                            bookCardBody.text(bookTitle);
+                            if(data.docs[bookNum].isbn) {
+                                var isbn = data.docs[bookNum].isbn[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
+                                var coverKey = "isbn";
+                                var coverKeyValue = isbn;
+                            }
+                            else if(data.docs[bookNum].oclc) {
+                                var oclc = data.docs[bookNum].oclc[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
+                                var coverKey = "oclc";
+                                var coverKeyValue = oclc;
+                            }
+                            else if(data.docs[bookNum].lccn) {
+                                var lccn = data.docs[bookNum].lccn[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
+                                var coverKey = "lccn";
+                                var coverKeyValue = lccn;
+                            }
+                            else if(data.docs[bookNum].olid) {
+                                var olid = data.docs[bookNum].olid[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
+                                var coverKey = "olid";
+                                var coverKeyValue = olid;
+                            }
+                            else {
+                                break;
+                            }
+                            var coverUrl = `https://covers.openlibrary.org/b/${coverKey}/${coverKeyValue}-M.jpg`;
+                            var coverImgDiv = $("<div></div>").addClass("uk-card-media-top uk-text-center");
+                            var coverImg = $("<img />").attr("src", coverUrl);
+                            coverImg.addClass("uk-margin-small-top");
+                            bookSuggestEl.attr("target", "_blank");
+                            coverImgDiv.append(coverImg);
+                            bookCard.append(coverImgDiv);
+                            bookCard.append(bookCardBody);
+                            bookSuggestEl.append(bookCard);
+                            $(".cookbook-suggestions").append(bookSuggestEl);
+                        }  
+                    }
+                    // save to search history
+                    cookbookHistory.push(searchTerm);
+                    
+                    // remove repeated searches
+                    for(var i = 0; i < cookbookHistory.length - 1; i++) {
+                        if(cookbookHistory[i] === cookbookHistory[cookbookHistory.length - 1]) {
+                            cookbookHistory.splice(cookbookHistory.length - 1, 1);
+                        }
+                    }
+
+                    // search history limit is 5
+                    if(cookbookHistory.length > 5) {
+                        cookbookHistory.splice(0, 1);
+                    };
+
+                    // save to localStorage
+                    localStorage.setItem("cookbook history", JSON.stringify(cookbookHistory));
+
+                    displayHistory();
+                }
+                else {
+                    var noResultsEl = $("<p></p>").text("There are no cookbooks for \"" + searchTerm + "\".");
+                    noResultsEl.addClass("no-results");
+                    $("#cookbooks").append(noResultsEl);
                 }
             });
         }
         else {
-            console.log("fetch failed");
+            var cookbookModal = $("#cookbook-overlay, #cookbook-modal");
+            cookbookModal.addClass("active");
+            $(".close-modal").on("click", function() {
+                cookbookModal.removeClass("active");
+            })
+            $("#ok-btn").on("click", function() {
+                cookbookModal.removeClass("active");
+            });
         }
     })
-    .catch(function(error) {
-        console.log("Could not connect to Open Library.");
+    .catch(function() {
+        spinnerEl.remove();
+        var cookbookModal = $("#cookbook-overlay, #cookbook-modal");
+        cookbookModal.addClass("active");
+        $(".close-modal").on("click", function() {
+            cookbookModal.removeClass("active");
+        })
+        $("#ok-btn").on("click", function() {
+            cookbookModal.removeClass("active");
+        })
     })
+};
+
+var displayHistory = function() {
+    if($(".history button")) {
+        $(".history button").each(function() {
+            this.remove();
+        });
+    }
+
+    for(var i = 0; i < cookbookHistory.length; i++) {
+        var historyBtnEl = $("<button>").text(cookbookHistory[i]);
+        historyBtnEl.addClass("uk-button")
+        $(".history").append(historyBtnEl);
+    }
+
+    $(".history button").on("click", function(event) {
+        getCookbooks(event.target.textContent);
+    })
+};
+
+$("#cookbook-submit").on("click", function(event) {
+    event.preventDefault();
+    var searchTerm = $("#cookbook-search").val().trim();
+
+    getCookbooks(searchTerm);
 });
+
+displayHistory();
