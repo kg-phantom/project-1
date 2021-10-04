@@ -81,12 +81,15 @@ slider.oninput = function() {
 
 $("#cookbook-submit").on("click", function(event) {
     event.preventDefault();
+    var spinnerEl = $("<div></div>").attr("uk-spinner", "ratio: 3");
+    $("#cookbooks").append(spinnerEl);
     var searchTerm = $("#cookbook-search").val().trim();
     var apiUrl = `https://openlibrary.org/search.json?q=${searchTerm}+cookbook`
 
     fetch(apiUrl)
     .then(function(response) {
         if(response.ok) {
+            spinnerEl.remove();
             response.json().then(function(data) {
                 if($("#cookbooks a")) {
                     $("#cookbooks a").each(function() {
@@ -164,6 +167,7 @@ $("#cookbook-submit").on("click", function(event) {
         }
     })
     .catch(function(error) {
+        spinnerEl.remove();
         var cookbookModal = $("#cookbook-overlay, #cookbook-modal");
         cookbookModal.addClass("active");
         $(".close-modal").on("click", function() {
