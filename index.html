@@ -59,19 +59,25 @@
                 </a> <!-- close modal -->
 
                 <div class="modal-content">
+                    <div class="inputSearch">
+                        <input type="text" placeholder="Enter Search" onblur="getInputVal()">
+                    </div>
                     <div class="time-of-day">
-                        <button> breakfast </button>
-                        <button> lunch </button>
-                        <button> dinner </button>
+                        <button class="breakfast"> breakfast </button>
+                        <button class="lunch"> lunch </button>
+                        <button class="dinner"> dinner </button>
                     </div>
                     <div class="slidecontainer">
                         <input type="range" min="0" max="2000" value="1000" class="slider" id="myRange">
                         <p>Calories: <span id="output"></span></p>
                     </div>
                     <div class="meal-type">
-                        <button>appetizer</button>
-                        <button>entree</button>
-                        <button>dessert</button>
+                        <button class="starter">appetizer</button>
+                        <button class="entree">entree</button>
+                        <button class="dessert">dessert</button>
+                    </div>
+                    <div class="submitPref">
+                        <button>submit</button>
                     </div>
                 </div> <!-- content -->
             </div> <!-- modal -->

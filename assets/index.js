@@ -6,7 +6,7 @@ var dishType = document.querySelector('.meal-type');
 const img = document.querySelectorAll(".recipeImg");
 const recipeLabel = document.querySelectorAll(".recipeText");
 const card = document.querySelectorAll("#card")
-const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=breakfast&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
+let apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f&random=true";
 
 const randomSetInt = (range, count) => {
     let nums = new Set();
@@ -60,6 +60,11 @@ $(document).on('click','li',function(){
         $(this).find('input[type="checkbox"]').prop('checked',true);
        });
 
+function getInputVal() {
+    const inputVal = document.querySelector('input').value;
+    console.log(inputVal);
+    return inputVal;
+}
 
 
 const modalElements = $('#preferences-overlay, #preferences');
@@ -70,6 +75,41 @@ $('.settings').click(function() {
 
 $('.close-modal').click(function() {
     modalElements.removeClass('active');
+})
+
+let mealType = "";
+let dishTypeModal = "";
+
+$('.submitPref').click(function() {
+    var inputVal = getInputVal();
+    apiUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${inputVal}&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f&mealType=${mealType}&dishType=${dishTypeModal}&calories=${slider.value}&random=true`
+    console.log(apiUrl)
+    loadDoc();
+    modalElements.removeClass('active');
+})
+
+$('.breakfast').click(function() {
+    mealType = "Breakfast"
+})
+
+$('.lunch').click(function() {
+    mealType = "Lunch";
+})
+
+$('.dinner').click(function() {
+    mealType = "Dinner";
+})
+
+$('.starter').click(function() {
+    dishTypeModal = "Starter";
+})
+
+$('.entree').click(function() {
+    dishTypeModal = "Main%20course";
+})
+
+$('.dessert').click(function() {
+    dishTypeModal = "Sweets";
 })
 
 var slider = document.getElementById("myRange");
