@@ -61,7 +61,7 @@ $(document).on('click','li',function(){
 
 
 
-const modalElements = $('.modal-overlay, .modal');
+const modalElements = $('#preferences-overlay, #preferences');
 
 $('.settings').click(function() {
     modalElements.addClass('active');
@@ -96,22 +96,81 @@ $("#cookbook-submit").on("click", function(event) {
                         this.remove();
                     })
                 }
-                for(var i = 0; i < 3; i++) {
-                    var bookTitle = data.docs[i].title;
-                    var isbn = data.docs[i].isbn[0];
-                    console.log(bookTitle);
-                    var bookSuggestEl = $("<a></a>").text(bookTitle);
-                    bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
-                    $("#cookbooks").append(bookSuggestEl);
-                    $("#cookbooks").append($("<br />"));
+                if($(".no-results")) {
+                    $(".no-results").remove();
+                }
+                if(data.numFound != 0) {
+                    for(var i = 0; i < 6; i++) {
+                        if(data.docs[i]) {
+                            var bookNum = randomInt(0, (data.docs.length - 1));
+                            var bookTitle = data.docs[bookNum].title;
+                            var bookSuggestEl = $("<a></a>");
+                            var bookCard = $("<div></div>").addClass("uk-card uk-card-default uk-card-hover");
+                            var bookCardBody = $("<div></div>").addClass("uk-card-body uk-card-title uk-text-center");
+                            bookCardBody.text(bookTitle);
+                            if(data.docs[bookNum].isbn) {
+                                var isbn = data.docs[bookNum].isbn[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
+                                var coverKey = "isbn";
+                                var coverKeyValue = isbn;
+                            }
+                            else if(data.docs[bookNum].oclc) {
+                                var oclc = data.docs[bookNum].oclc[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
+                                var coverKey = "oclc";
+                                var coverKeyValue = oclc;
+                            }
+                            else if(data.docs[bookNum].lccn) {
+                                var lccn = data.docs[bookNum].lccn[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
+                                var coverKey = "lccn";
+                                var coverKeyValue = lccn;
+                            }
+                            else {
+                                var olid = data.docs[bookNum].olid[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
+                                var coverKey = "olid";
+                                var coverKeyValue = olid;
+                            }
+                            var coverUrl = `http://covers.openlibrary.org/b/${coverKey}/${coverKeyValue}-M.jpg`;
+                            var coverImgDiv = $("<div></div>").addClass("uk-card-media-top uk-text-center");
+                            var coverImg = $("<img />").attr("src", coverUrl);
+                            coverImg.addClass("uk-margin-small-top");
+                            bookSuggestEl.attr("target", "_blank");
+                            coverImgDiv.append(coverImg);
+                            bookCard.append(coverImgDiv);
+                            bookCard.append(bookCardBody);
+                            bookSuggestEl.append(bookCard);
+                            $(".cookbook-suggestions").append(bookSuggestEl);
+                        }  
+                    }
+                }
+                else {
+                    var noResultsEl = $("<p></p>").text("There are no cookbooks for \"" + searchTerm + "\".");
+                    noResultsEl.addClass("no-results");
+                    $("#cookbooks").append(noResultsEl);
                 }
             });
         }
         else {
-            console.log("fetch failed");
+            var cookbookModal = $("#cookbook-overlay, #cookbook-modal");
+            cookbookModal.addClass("active");
+            $(".close-modal").on("click", function() {
+                cookbookModal.removeClass("active");
+            })
+            $("#ok-btn").on("click", function() {
+                cookbookModal.removeClass("active");
+            });
         }
     })
     .catch(function(error) {
-        console.log("Could not connect to Open Library.");
+        var cookbookModal = $("#cookbook-overlay, #cookbook-modal");
+        cookbookModal.addClass("active");
+        $(".close-modal").on("click", function() {
+            cookbookModal.removeClass("active");
+        })
+        $("#ok-btn").on("click", function() {
+            cookbookModal.removeClass("active");
+        })
     })
 });
