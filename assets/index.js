@@ -1,4 +1,4 @@
- // query selectors for inputs
+// query selectors for inputs
 var timeOfDay = document.querySelector('.time-of-day');
 var calorieCount = document.querySelector('#output');
 var dishType = document.querySelector('.meal-type');
