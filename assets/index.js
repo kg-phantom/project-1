@@ -132,7 +132,7 @@ $("#cookbook-submit").on("click", function(event) {
                                 var coverKey = "olid";
                                 var coverKeyValue = olid;
                             }
-                            var coverUrl = `http://covers.openlibrary.org/b/${coverKey}/${coverKeyValue}-M.jpg`;
+                            var coverUrl = `https://covers.openlibrary.org/b/${coverKey}/${coverKeyValue}-M.jpg`;
                             var coverImgDiv = $("<div></div>").addClass("uk-card-media-top uk-text-center");
                             var coverImg = $("<img />").attr("src", coverUrl);
                             coverImg.addClass("uk-margin-small-top");
