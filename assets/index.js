@@ -29,8 +29,9 @@ function loadDoc() {
                 img[i].src = data.hits[randomNum[i]].recipe.image;
                 recipeLabel[i].innerHTML = data.hits[randomNum[i]].recipe.label;
                 console.log(data.hits[randomNum[i]].recipe.shareAs);
+                let recipeApiUrl = data.hits[randomNum[i]].recipe.shareAs
                 card[i].onclick = function () {
-                    location.href = data.hits[randomNum[i]].recipe.shareAs;
+                    location.href = recipeApiUrl;
                 }
                 console.log(data.hits[randomNum[i]].recipe.label);
             }
