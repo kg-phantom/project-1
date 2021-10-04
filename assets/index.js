@@ -100,26 +100,48 @@ $("#cookbook-submit").on("click", function(event) {
                     $(".no-results").remove();
                 }
                 if(data.numFound != 0) {
-                    for(var i = 0; i < 5; i++) {
+                    for(var i = 0; i < 6; i++) {
                         if(data.docs[i]) {
                             var bookNum = randomInt(0, (data.docs.length - 1));
                             var bookTitle = data.docs[bookNum].title;
-                            var bookSuggestEl = $("<a></a>").text(bookTitle);
+                            var bookSuggestEl = $("<a></a>");
+                            var bookCard = $("<div></div>").addClass("uk-card uk-card-default uk-card-hover");
+                            var bookCardBody = $("<div></div>").addClass("uk-card-body uk-card-title uk-text-center");
+                            bookCardBody.text(bookTitle);
                             if(data.docs[bookNum].isbn) {
                                 var isbn = data.docs[bookNum].isbn[0];
                                 bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
+                                var coverKey = "isbn";
+                                var coverKeyValue = isbn;
                             }
                             else if(data.docs[bookNum].oclc) {
                                 var oclc = data.docs[bookNum].oclc[0];
                                 bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
+                                var coverKey = "oclc";
+                                var coverKeyValue = oclc;
                             }
-                            else {
+                            else if(data.docs[bookNum].lccn) {
                                 var lccn = data.docs[bookNum].lccn[0];
                                 bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
+                                var coverKey = "lccn";
+                                var coverKeyValue = lccn;
                             }
+                            else {
+                                var olid = data.docs[bookNum].olid[0];
+                                bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
+                                var coverKey = "olid";
+                                var coverKeyValue = olid;
+                            }
+                            var coverUrl = `http://covers.openlibrary.org/b/${coverKey}/${coverKeyValue}-M.jpg`;
+                            var coverImgDiv = $("<div></div>").addClass("uk-card-media-top uk-text-center");
+                            var coverImg = $("<img />").attr("src", coverUrl);
+                            coverImg.addClass("uk-margin-small-top");
                             bookSuggestEl.attr("target", "_blank");
-                            $("#cookbooks").append(bookSuggestEl);
-                            $("#cookbooks").append($("<br />"));
+                            coverImgDiv.append(coverImg);
+                            bookCard.append(coverImgDiv);
+                            bookCard.append(bookCardBody);
+                            bookSuggestEl.append(bookCard);
+                            $(".cookbook-suggestions").append(bookSuggestEl);
                         }  
                     }
                 }
