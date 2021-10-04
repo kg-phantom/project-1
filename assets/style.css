@@ -77,6 +77,22 @@ p {
     align-items: center;
 }
 
+/*input search styling in modal */
+
+.inputSearch {
+    background-color: #E8ADAA;
+}
+
+.inputSearch input {
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    width: 100%;
+    font-size: 20px;
+}
+
+/*input search bar in modal end */
+
 .slidecontainer p {
     font-size: 24px;
     font-weight: lighter;
