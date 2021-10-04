@@ -127,24 +127,9 @@ slider.oninput = function() {
   output.innerHTML = this.value;
 }
 
-var displayHistory = function() {
-    if($(".history button")) {
-        $(".history button").each(function() {
-            this.remove();
-        });
-    }
-
-    for(var i = 0; i < cookbookHistory.length; i++) {
-        var historyBtnEl = $("<button>").text(cookbookHistory[i]);
-        $(".history").append(historyBtnEl);
-    }
-};
-
-$("#cookbook-submit").on("click", function(event) {
-    event.preventDefault();
+var getCookbooks = function(searchTerm) {
     var spinnerEl = $("<div></div>").attr("uk-spinner", "ratio: 3");
     $("#cookbooks").append(spinnerEl);
-    var searchTerm = $("#cookbook-search").val().trim();
     var apiUrl = `https://openlibrary.org/search.json?q=${searchTerm}+cookbook`
 
     fetch(apiUrl)
@@ -190,11 +175,14 @@ $("#cookbook-submit").on("click", function(event) {
                                 var coverKey = "lccn";
                                 var coverKeyValue = lccn;
                             }
-                            else {
+                            else if(data.docs[bookNum].olid) {
                                 var olid = data.docs[bookNum].olid[0];
                                 bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
                                 var coverKey = "olid";
                                 var coverKeyValue = olid;
+                            }
+                            else {
+                                break;
                             }
                             var coverUrl = `https://covers.openlibrary.org/b/${coverKey}/${coverKeyValue}-M.jpg`;
                             var coverImgDiv = $("<div></div>").addClass("uk-card-media-top uk-text-center");
@@ -257,6 +245,31 @@ $("#cookbook-submit").on("click", function(event) {
             cookbookModal.removeClass("active");
         })
     })
+};
+
+var displayHistory = function() {
+    if($(".history button")) {
+        $(".history button").each(function() {
+            this.remove();
+        });
+    }
+
+    for(var i = 0; i < cookbookHistory.length; i++) {
+        var historyBtnEl = $("<button>").text(cookbookHistory[i]);
+        historyBtnEl.addClass("uk-button")
+        $(".history").append(historyBtnEl);
+    }
+
+    $(".history button").on("click", function(event) {
+        getCookbooks(event.target.textContent);
+    })
+};
+
+$("#cookbook-submit").on("click", function(event) {
+    event.preventDefault();
+    var searchTerm = $("#cookbook-search").val().trim();
+
+    getCookbooks(searchTerm);
 });
 
 displayHistory();
