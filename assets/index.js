@@ -6,13 +6,18 @@ var dishType = document.querySelector('.meal-type');
 const img = document.querySelectorAll(".recipeImg");
 const recipeLabel = document.querySelectorAll(".recipeText");
 const card = document.querySelectorAll("#card")
-const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
+let apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f&random=true";
 
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
+const randomSetInt = (range, count) => {
+    let nums = new Set();
+    while (nums.size < count) {
+        nums.add(Math.floor(Math.random() * (range - 1 + 1) + 1));
+    }
+    return [...nums];
 }
 
-let hitsNum = randomInt(0,19)
+let randomNum = randomSetInt(19, 6)
+console.log(randomNum)
 
 function loadDoc() {
     var xhttp = new XMLHttpRequest();
@@ -21,17 +26,14 @@ function loadDoc() {
             var data = JSON.parse(this.responseText);
             console.log(data.hits)
             for (var i = 0; i < 6; i++) {
-                let hitsNum = randomInt(0,20);
-                console.log(hitsNum)
-                img[i].src = data.hits[hitsNum].recipe.image;
-                recipeLabel[i].innerHTML = data.hits[hitsNum].recipe.label;
-                console.log(data.hits[hitsNum].recipe.shareAs);
-                console.log(card)
+                img[i].src = data.hits[randomNum[i]].recipe.image;
+                recipeLabel[i].innerHTML = data.hits[randomNum[i]].recipe.label;
+                console.log(data.hits[randomNum[i]].recipe.shareAs);
+                let recipeApiUrl = data.hits[randomNum[i]].recipe.shareAs
                 card[i].onclick = function () {
-                    location.href = data.hits[hitsNum].recipe.shareAs;
+                    location.href = recipeApiUrl;
                 }
-                console.log(data.hits[hitsNum].recipe.label);
-                randomInt(0,20);
+                console.log(data.hits[randomNum[i]].recipe.label);
             }
         }
     };
@@ -59,6 +61,11 @@ $(document).on('click','li',function(){
         $(this).find('input[type="checkbox"]').prop('checked',true);
        });
 
+function getInputVal() {
+    const inputVal = document.querySelector('input').value;
+    console.log(inputVal);
+    return inputVal;
+}
 
 
 const modalElements = $('#preferences-overlay, #preferences');
@@ -69,6 +76,41 @@ $('.settings').click(function() {
 
 $('.close-modal').click(function() {
     modalElements.removeClass('active');
+})
+
+let mealType = "";
+let dishTypeModal = "";
+
+$('.submitPref').click(function() {
+    var inputVal = getInputVal();
+    apiUrl = `https://api.edamam.com/api/recipes/v2?type=public&q=${inputVal}&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f&mealType=${mealType}&dishType=${dishTypeModal}&calories=${slider.value}&random=true`
+    console.log(apiUrl)
+    loadDoc();
+    modalElements.removeClass('active');
+})
+
+$('.breakfast').click(function() {
+    mealType = "Breakfast"
+})
+
+$('.lunch').click(function() {
+    mealType = "Lunch";
+})
+
+$('.dinner').click(function() {
+    mealType = "Dinner";
+})
+
+$('.starter').click(function() {
+    dishTypeModal = "Starter";
+})
+
+$('.entree').click(function() {
+    dishTypeModal = "Main%20course";
+})
+
+$('.dessert').click(function() {
+    dishTypeModal = "Sweets";
 })
 
 var slider = document.getElementById("myRange");
