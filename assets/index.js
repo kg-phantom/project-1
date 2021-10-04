@@ -6,7 +6,7 @@ var dishType = document.querySelector('.meal-type');
 const img = document.querySelectorAll(".recipeImg");
 const recipeLabel = document.querySelectorAll(".recipeText");
 const card = document.querySelectorAll("#card")
-const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
+const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=breakfast&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
 
 const randomSetInt = (range, count) => {
     let nums = new Set();
@@ -33,7 +33,6 @@ function loadDoc() {
                     location.href = data.hits[randomNum[i]].recipe.shareAs;
                 }
                 console.log(data.hits[randomNum[i]].recipe.label);
-                randomInt(0,20);
             }
         }
     };
