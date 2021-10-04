@@ -8,11 +8,16 @@ const recipeLabel = document.querySelectorAll(".recipeText");
 const card = document.querySelectorAll("#card")
 const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
 
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min)
+const randomSetInt = (range, count) => {
+    let nums = new Set();
+    while (nums.size < count) {
+        nums.add(Math.floor(Math.random() * (range - 1 + 1) + 1));
+    }
+    return [...nums];
 }
 
-let hitsNum = randomInt(0,19)
+let randomNum = randomSetInt(19, 6)
+console.log(randomNum)
 
 function loadDoc() {
     var xhttp = new XMLHttpRequest();
@@ -21,16 +26,13 @@ function loadDoc() {
             var data = JSON.parse(this.responseText);
             console.log(data.hits)
             for (var i = 0; i < 6; i++) {
-                let hitsNum = randomInt(0,20);
-                console.log(hitsNum)
-                img[i].src = data.hits[hitsNum].recipe.image;
-                recipeLabel[i].innerHTML = data.hits[hitsNum].recipe.label;
-                console.log(data.hits[hitsNum].recipe.shareAs);
-                console.log(card)
+                img[i].src = data.hits[randomNum[i]].recipe.image;
+                recipeLabel[i].innerHTML = data.hits[randomNum[i]].recipe.label;
+                console.log(data.hits[randomNum[i]].recipe.shareAs);
                 card[i].onclick = function () {
-                    location.href = data.hits[hitsNum].recipe.shareAs;
+                    location.href = data.hits[randomNum[i]].recipe.shareAs;
                 }
-                console.log(data.hits[hitsNum].recipe.label);
+                console.log(data.hits[randomNum[i]].recipe.label);
                 randomInt(0,20);
             }
         }
