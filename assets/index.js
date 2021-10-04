@@ -7,6 +7,8 @@ const img = document.querySelectorAll(".recipeImg");
 const recipeLabel = document.querySelectorAll(".recipeText");
 const card = document.querySelectorAll("#card")
 const apiUrl = "https://api.edamam.com/api/recipes/v2?type=public&q=chicken&app_id=011d75e3&app_key=a72bc3edeb9e8c56d05a5b3951a5a64f";
+// cookbook search history
+var cookbookHistory = JSON.parse(localStorage.getItem("cookbook history"));
 
 function randomInt(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -166,7 +168,7 @@ $("#cookbook-submit").on("click", function(event) {
             });
         }
     })
-    .catch(function(error) {
+    .catch(function() {
         spinnerEl.remove();
         var cookbookModal = $("#cookbook-overlay, #cookbook-modal");
         cookbookModal.addClass("active");
