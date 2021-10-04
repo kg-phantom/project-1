@@ -96,25 +96,25 @@ $("#cookbook-submit").on("click", function(event) {
                         this.remove();
                     })
                 }
-                if($("#cookbooks p")) {
-                    $("#cookbooks p").remove();
+                if($(".no-results")) {
+                    $(".no-results").remove();
                 }
                 if(data.numFound != 0) {
                     for(var i = 0; i < 5; i++) {
                         if(data.docs[i]) {
-                            var book = randomInt(0, (data.docs.length - 1));
-                            var bookTitle = data.docs[book].title;
+                            var bookNum = randomInt(0, (data.docs.length - 1));
+                            var bookTitle = data.docs[bookNum].title;
                             var bookSuggestEl = $("<a></a>").text(bookTitle);
-                            if(data.docs[book].isbn) {
-                                var isbn = data.docs[book].isbn[0];
+                            if(data.docs[bookNum].isbn) {
+                                var isbn = data.docs[bookNum].isbn[0];
                                 bookSuggestEl.attr("href", "https://openlibrary.org/isbn/" + isbn);
                             }
-                            else if(data.docs[book].oclc) {
-                                var oclc = data.docs[book].oclc[0];
+                            else if(data.docs[bookNum].oclc) {
+                                var oclc = data.docs[bookNum].oclc[0];
                                 bookSuggestEl.attr("href", "https://openlibrary.org/oclc/" + oclc);
                             }
                             else {
-                                var lccn = data.docs[book].lccn[0];
+                                var lccn = data.docs[bookNum].lccn[0];
                                 bookSuggestEl.attr("href", "https://openlibrary.org/lccn/" + lccn);
                             }
                             bookSuggestEl.attr("target", "_blank");
@@ -125,6 +125,7 @@ $("#cookbook-submit").on("click", function(event) {
                 }
                 else {
                     var noResultsEl = $("<p></p>").text("There are no cookbooks for \"" + searchTerm + "\".");
+                    noResultsEl.addClass("no-results");
                     $("#cookbooks").append(noResultsEl);
                 }
             });
