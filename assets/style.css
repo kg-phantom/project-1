@@ -65,7 +65,8 @@ p {
     margin: 5px 8px 6px 1px;
 }
 
-.modal-content button:hover {
+.modal-content button:hover,
+.history button:hover {
     background: var(--quaternary-color);
     box-shadow: 1px 1px 10px rgba(107, 107, 107, 0.3), -1px -1px 10px rgba(107, 107, 107, 0.2);
 }
@@ -333,6 +334,15 @@ p {
 
 #cookbook-submit:hover {
     background-color: #e0e0e0;
+}
+
+.history button {
+    border: none;
+    color: var(--tertiary-color);
+    font-size: 15px;
+    background: var(--secondary-color);
+    padding: 2px 5px;
+    margin: 5px 8px 6px 1px;
 }
 
 .cookbook-suggestions {
